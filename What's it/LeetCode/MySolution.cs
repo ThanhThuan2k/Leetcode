@@ -54,6 +54,29 @@
             return dummy.next;
         }
 
+        /// <summary>
+        /// https://leetcode.com/problems/longest-substring-without-repeating-characters/
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static int LengthOfLongestSubstring(string s)
+        {
+            Dictionary<char, int> charMap = new Dictionary<char, int>();
+            int left = 0, maxLength = 0;
+
+            for (int right = 0; right < s.Length; right++)
+            {
+                if (charMap.ContainsKey(s[right]) && charMap[s[right]] >= left)
+                {
+                    left = charMap[s[right]] + 1;
+                }
+
+                charMap[s[right]] = right;
+                maxLength = Math.Max(maxLength, right - left + 1);
+            }
+
+            return maxLength;
+        }
 
     }
 
